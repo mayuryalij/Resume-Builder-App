@@ -355,91 +355,96 @@ function Editor(props) {
 
   const handleSubmission = () => {
     switch (sections[activeSectionKey]) {
-      case sections.basicInfo: {
+      case sections.basicInfo: { 
+        // Code for basicInfo section
         const tempDetail = {
-          name: values.name,
-          title: values.title,
-          linkedin: values.linkedin,
-          github: values.github,
-          email: values.email,
-          phone: values.phone,
-        };
-
-        props.setInformation((prev) => ({
-          ...prev,
-          [sections.basicInfo]: {
-            ...prev[sections.basicInfo],
-            detail: tempDetail,
-            sectionTitle,
-          },
-        }));
+            name: values.name,
+            title: values.title,
+            linkedin: values.linkedin,
+            github: values.github,
+            email: values.email,
+            phone: values.phone,
+          };
+  
+          props.setInformation((prev) => ({
+            ...prev,
+            [sections.basicInfo]: {
+              ...prev[sections.basicInfo],
+              detail: tempDetail,
+              sectionTitle,
+            },
+          }));
         break;
       }
       case sections.workExp: {
+        // Code for workExp section
         const tempDetail = {
-          certificationLink: values.certificationLink,
-          title: values.title,
-          startDate: values.startDate,
-          endDate: values.endDate,
-          companyName: values.companyName,
-          location: values.location,
-          points: values.points,
-        };
-        const tempDetails = [...information[sections.workExp]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
-
-        props.setInformation((prev) => ({
-          ...prev,
-          [sections.workExp]: {
-            ...prev[sections.workExp],
-            details: tempDetails,
-            sectionTitle,
-          },
-        }));
+            certificationLink: values.certificationLink,
+            title: values.title,
+            startDate: values.startDate,
+            endDate: values.endDate,
+            companyName: values.companyName,
+            location: values.location,
+            points: values.points,
+          };
+          const tempDetails = [...information[sections.workExp]?.details];
+          tempDetails[activeDetailIndex] = tempDetail;
+  
+          props.setInformation((prev) => ({
+            ...prev,
+            [sections.workExp]: {
+              ...prev[sections.workExp],
+              details: tempDetails,
+              sectionTitle,
+            },
+          }));
         break;
       }
       case sections.project: {
+        // Code for project section
         const tempDetail = {
-          link: values.link,
-          title: values.title,
-          overview: values.overview,
-          github: values.github,
-          points: values.points,
-        };
-        const tempDetails = [...information[sections.project]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
-
-        props.setInformation((prev) => ({
-          ...prev,
-          [sections.project]: {
-            ...prev[sections.project],
-            details: tempDetails,
-            sectionTitle,
-          },
-        }));
+            link: values.link,
+            title: values.title,
+            overview: values.overview,
+            github: values.github,
+            points: values.points,
+          };
+          const tempDetails = [...information[sections.project]?.details];
+          tempDetails[activeDetailIndex] = tempDetail;
+  
+          props.setInformation((prev) => ({
+            ...prev,
+            [sections.project]: {
+              ...prev[sections.project],
+              details: tempDetails,
+              sectionTitle,
+            },
+          }));
         break;
       }
       case sections.education: {
+        // Code for education section
         const tempDetail = {
-          title: values.title,
-          college: values.college,
-          startDate: values.startDate,
-          endDate: values.endDate,
-        };
-        const tempDetails = [...information[sections.education]?.details];
-        tempDetails[activeDetailIndex] = tempDetail;
-
-        props.setInformation((prev) => ({
-          ...prev,
-          [sections.education]: {
-            ...prev[sections.education],
-            details: tempDetails,
-            sectionTitle,
-          },
-        }));
+            title: values.title,
+            college: values.college,
+            startDate: values.startDate,
+            endDate: values.endDate,
+          };
+          const tempDetails = [...information[sections.education]?.details];
+          tempDetails[activeDetailIndex] = tempDetail;
+  
+          props.setInformation((prev) => ({
+            ...prev,
+            [sections.education]: {
+              ...prev[sections.education],
+              details: tempDetails,
+              sectionTitle,
+            },
+          }));
         break;
       }
       case sections.achievement: {
+        // Code for achievement section
         const tempPoints = values.points;
 
         props.setInformation((prev) => ({
@@ -453,6 +458,7 @@ function Editor(props) {
         break;
       }
       case sections.summary: {
+        // Code for summary section
         const tempDetail = values.summary;
 
         props.setInformation((prev) => ({
@@ -466,6 +472,7 @@ function Editor(props) {
         break;
       }
       case sections.other: {
+        // Code for other section
         const tempDetail = values.other;
 
         props.setInformation((prev) => ({
@@ -478,8 +485,11 @@ function Editor(props) {
         }));
         break;
       }
+      default:
+        console.error("Invalid activeSectionKey:", activeSectionKey);
     }
   };
+  
 
   const handleAddNew = () => {
     const details = activeInformation?.details;
@@ -516,78 +526,70 @@ function Editor(props) {
   };
 
   useEffect(() => {
-    const activeInfo = information[sections[activeSectionKey]];
-    setActiveInformation(activeInfo);
-    setSectionTitle(sections[activeSectionKey]);
-    setActiveDetailIndex(0);
-    setValues({
-      name: activeInfo?.detail?.name || "",
-      overview: activeInfo?.details
-        ? activeInfo.details[0]?.overview || ""
-        : "",
-      link: activeInfo?.details ? activeInfo.details[0]?.link || "" : "",
-      certificationLink: activeInfo?.details
-        ? activeInfo.details[0]?.certificationLink || ""
-        : "",
-      companyName: activeInfo?.details
-        ? activeInfo.details[0]?.companyName || ""
-        : "",
-      college: activeInfo?.details
-        ? activeInfo.details[0]?.college || ""
-        : "",
-      location: activeInfo?.details
-        ? activeInfo.details[0]?.location || ""
-        : "",
-      startDate: activeInfo?.details
-        ? activeInfo.details[0]?.startDate || ""
-        : "",
-      endDate: activeInfo?.details ? activeInfo.details[0]?.endDate || "" : "",
-      points: activeInfo?.details
-        ? activeInfo.details[0]?.points
-          ? [...activeInfo.details[0]?.points]
-          : ""
-        : activeInfo?.points
-        ? [...activeInfo.points]
-        : "",
-      title: activeInfo?.details
-        ? activeInfo.details[0]?.title || ""
-        : activeInfo?.detail?.title || "",
-      linkedin: activeInfo?.detail?.linkedin || "",
-      github: activeInfo?.details
-        ? activeInfo.details[0]?.github || ""
-        : activeInfo?.detail?.github || "",
-      phone: activeInfo?.detail?.phone || "",
-      email: activeInfo?.detail?.email || "",
-      summary: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
-      other: typeof activeInfo?.detail !== "object" ? activeInfo.detail : "",
-    });
-  }, [activeSectionKey]);
-
-  useEffect(() => {
-    setActiveInformation(information[sections[activeSectionKey]]);
-  }, [information]);
-
-  useEffect(() => {
-    const details = activeInformation?.details;
-    if (!details) return;
-
-    const activeInfo = information[sections[activeSectionKey]];
-    setValues({
-      overview: activeInfo.details[activeDetailIndex]?.overview || "",
-      link: activeInfo.details[activeDetailIndex]?.link || "",
-      certificationLink:
-        activeInfo.details[activeDetailIndex]?.certificationLink || "",
-      companyName: activeInfo.details[activeDetailIndex]?.companyName || "",
-      location: activeInfo.details[activeDetailIndex]?.location || "",
-      startDate: activeInfo.details[activeDetailIndex]?.startDate || "",
-      endDate: activeInfo.details[activeDetailIndex]?.endDate || "",
-      points: activeInfo.details[activeDetailIndex]?.points || "",
-      title: activeInfo.details[activeDetailIndex]?.title || "",
-      linkedin: activeInfo.details[activeDetailIndex]?.linkedin || "",
-      github: activeInfo.details[activeDetailIndex]?.github || "",
-      college: activeInfo.details[activeDetailIndex]?.college || "",
-    });
-  }, [activeDetailIndex]);
+    switch (activeSectionKey) {
+      case "basicInfo":
+        setActiveInformation(information[sections.basicInfo]);
+        setSectionTitle(sections.basicInfo);
+        setValues((prev) => ({
+          ...prev,
+          name: activeInformation?.detail?.name || "",
+          title: activeInformation?.detail?.title || "",
+          linkedin: activeInformation?.detail?.linkedin || "",
+          github: activeInformation?.detail?.github || "",
+          phone: activeInformation?.detail?.phone || "",
+          email: activeInformation?.detail?.email || "",
+        }));
+        break;
+      case "workExp":
+        setActiveInformation(information[sections.workExp]);
+        setSectionTitle(sections.workExp);
+        setValues((prev) => ({
+          ...prev,
+          title: activeInformation?.detail?.title || "",
+          companyName: activeInformation?.detail?.companyName || "",
+          certificationLink: activeInformation?.detail?.certificationLink || "",
+          location: activeInformation?.detail?.location || "",
+          startDate: activeInformation?.detail?.startDate || "",
+          endDate: activeInformation?.detail?.endDate || "",
+        }));
+        break;
+      case "project":
+        setActiveInformation(information[sections.project]);
+        setSectionTitle(sections.project);
+        setValues((prev) => ({
+          ...prev,
+          title: activeInformation?.detail?.title || "",
+          overview: activeInformation?.detail?.overview || "",
+          link: activeInformation?.detail?.link || "",
+          github: activeInformation?.detail?.github || "",
+        }));
+        break;
+      case "education":
+        setActiveInformation(information[sections.education]);
+        setSectionTitle(sections.education);
+        setValues((prev) => ({
+          ...prev,
+          title: activeInformation?.detail?.title || "",
+          college: activeInformation?.detail?.college || "",
+          startDate: activeInformation?.detail?.startDate || "",
+          endDate: activeInformation?.detail?.endDate || "",
+        }));
+        break;
+      case "achievements":
+        setActiveInformation(information[sections.achievements]);
+        setSectionTitle(sections.achievements);
+        setValues((prev) => ({
+          ...prev,
+          points: activeInformation?.detail?.points || [], 
+        }));
+        break;
+      default:
+        // Add a default case here
+        console.error("Invalid activeSectionKey:", activeSectionKey);
+    }
+  }, [activeSectionKey, sections, information, activeInformation]);
+  
+  
 
   return (
     <div className={styles.container}>
