@@ -17,7 +17,7 @@ With Resume Builder, users have the flexibility to choose from a variety of cust
 HTML,
 CSS,
 JavaScript, 
-React JS, -
+React JS, 
 
 
 ## Getting Started
