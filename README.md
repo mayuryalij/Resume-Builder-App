@@ -14,12 +14,11 @@ With Resume Builder, users have the flexibility to choose from a variety of cust
 
 ## Technology Used
 
--HTML,
--CSS,
--JavaScript, -React JS, -
-React Redux,
--Formik,
--Tailwind CSS
+HTML,
+CSS,
+JavaScript, 
+React JS, -
+
 
 ## Getting Started
 
